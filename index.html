@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tesorería Corporativa</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #27ae60;
+            --accent: #e67e22;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--secondary);
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        #results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--secondary);
+            border-radius: 4px;
+        }
+
+        .suggestion {
+            font-style: italic;
+            color: #555;
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            color: white;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Calculadora de Tesorería Corporativa</h1>
+        <p>Análisis de Liquidez, Eficiencia y Flujo de Caja</p>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Datos de Balance (Saldos)</h3>
+            <label>Efectivo y Equivalentes ($)</label>
+            <input type="number" id="cash" placeholder="Ej: 50000">
+            
+            <label>Cuentas por Cobrar ($)</label>
+            <input type="number" id="cxc" placeholder="Ej: 120000">
+            
+            <label>Inventarios ($)</label>
+            <input type="number" id="inventory" placeholder="Ej: 80000">
+            
+            <label>Pasivo Circulante (Deudas < 1 año)</label>
+            <input type="number" id="current_liabilities" placeholder="Ej: 150000">
+        </div>
+
+        <div class="card">
+            <h3>Datos Operativos (Anual)</h3>
+            <label>Ventas a Crédito ($)</label>
+            <input type="number" id="sales" placeholder="Ej: 1000000">
+            
+            <label>Compras a Crédito ($)</label>
+            <input type="number" id="purchases" placeholder="Ej: 600000">
+            
+            <label>Costo de Ventas ($)</label>
+            <input type="number" id="cogs" placeholder="Ej: 700000">
+            
+            <label>Días del Periodo (normalmente 365)</label>
+            <input type="number" id="days" value="365">
+        </div>
+
+        <div class="card">
+            <h3>Flujo de Caja y Capital</h3>
+            <label>Flujo de Caja Operativo ($)</label>
+            <input type="number" id="ope_cash" placeholder="Ej: 200000">
+            
+            <label>Gastos de Capital (CapEx) ($)</label>
+            <input type="number" id="capex" placeholder="Ej: 50000">
+        </div>
+    </div>
+
+    <button onclick="calculateFinance()">Calcular Indicadores de Tesorería</button>
+
+    <div id="results">
+        <h2>Resultados e Interpretación</h2>
+        <div id="displayResults"></div>
+    </div>
+
+    <footer>
+        <p><strong>App desarrollada por VIBRAS POSITIVAS HM</strong></p>
+        <p>Derechos de Autor © 2026 | Contacto: 3117700431</p>
+    </footer>
+</div>
+
+<script>
+function calculateFinance() {
+    // Inputs
+    const cash = parseFloat(document.getElementById('cash').value) || 0;
+    const cxc = parseFloat(document.getElementById('cxc').value) || 0;
+    const inv = parseFloat(document.getElementById('inventory').value) || 0;
+    const pasivo = parseFloat(document.getElementById('current_liabilities').value) || 0;
+    const ventas = parseFloat(document.getElementById('sales').value) || 0;
+    const compras = parseFloat(document.getElementById('purchases').value) || 0;
+    const costo = parseFloat(document.getElementById('cogs').value) || 1;
+    const dias = parseFloat(document.getElementById('days').value) || 365;
+    const fco = parseFloat(document.getElementById('ope_cash').value) || 0;
+    const capex = parseFloat(document.getElementById('capex').value) || 0;
+
+    const activo_circ = cash + cxc + inv;
+
+    // Fórmulas
+    const razon_circ = activo_circ / pasivo;
+    const prueba_acida = (activo_circ - inv) / pasivo;
+    const ratio_tesoreria = cash / pasivo;
+    const cap_trabajo = activo_circ - pasivo;
+    
+    // Ratios de Actividad
+    const dias_cobro = (cxc / ventas) * dias;
+    const dias_inv = (inv / costo) * dias;
+    const dias_pago = (pasivo / compras) * dias; // Simplificado con pasivo actual
+    const cce = dias_inv + dias_cobro - dias_pago;
+    
+    // Flujo
+    const fcf = fco - capex;
+
+    // Mostrar Resultados
+    document.getElementById('results').style.display = 'block';
+    const display = document.getElementById('displayResults');
+    display.innerHTML = '';
+
+    const addResult = (title, value, unit, formula, explanation, suggestion) => {
+        display.innerHTML += `
+            <div class="result-item">
+                <strong>${title}: ${value.toLocaleString(undefined, {maximumFractionDigits: 2})} ${unit}</strong>
+                <div style="font-size: 0.85em; color: #666;">Fórmula: ${formula}</div>
+                <p>${explanation}</p>
+                <div class="suggestion">💡 <strong>Sugerencia:</strong> ${suggestion}</div>
+            </div>
+        `;
+    };
+
+    addResult("Razón Circulante", razon_circ, "veces", "Activo Circ. / Pasivo Circ.", 
+        "Indica la capacidad de cubrir deudas de corto plazo.", 
+        razon_circ < 1 ? "Alerta: Riesgo de liquidez. Busque financiamiento o acelere cobros." : "Saludable: Tiene respaldo suficiente.");
+
+    addResult("Prueba Ácida", prueba_acida, "veces", "(Activo Circ. - Inv) / Pasivo Circ.", 
+        "Capacidad de pago sin depender de la venta de inventarios.", 
+        prueba_acida < 1 ? "Su liquidez inmediata depende mucho del stock. Cuidado con inventarios lentos." : "Excelente capacidad de reacción inmediata.");
+
+    addResult("Ratio de Tesorería", ratio_tesoreria, "veces", "Efectivo / Pasivo Circ.", 
+        "Mide cuánto de la deuda se puede pagar 'ya mismo' con dinero en caja.", 
+        ratio_tesoreria < 0.3 ? "Efectivo bajo. Asegúrese de tener líneas de crédito disponibles." : "Nivel de caja óptimo para emergencias.");
+
+    addResult("Capital de Trabajo Neto", cap_trabajo, "$", "Activo Circ. - Pasivo Circ.", 
+        "Recursos disponibles para operar el día a día.", 
+        cap_trabajo > 0 ? "Tiene fondo de maniobra para crecer." : "Peligro: Está operando con recursos de terceros o en déficit.");
+
+    addResult("Ciclo de Conversión de Efectivo (CCE)", cce, "días", "Días Inv. + Días CxC - Días CxP", 
+        "Tiempo total que el dinero está 'atrapado' en la operación.", 
+        cce > 90 ? "Ciclo muy largo. Intente cobrar más rápido o negociar más plazo con proveedores." : "Ciclo eficiente. El dinero retorna rápido a la caja.");
+
+    addResult("Flujo de Caja Libre (FCF)", fcf, "$", "Flujo Op. - CapEx", 
+        "Dinero disponible para pagar dividendos o reducir deuda.", 
+        fcf > 0 ? "Genera valor. Puede reinvertir o repartir utilidades." : "Cuidado: La operación no está cubriendo sus inversiones de capital.");
+    
+    // Desplazar a resultados
+    window.scrollTo({ top: document.getElementById('results').offsetTop, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
