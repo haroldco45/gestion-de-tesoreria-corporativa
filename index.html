@@ -3,130 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Tesorería Corporativa</title>
+    <title>SISTEMA DE TESORERÍA | VIBRAS POSITIVAS HM</title>
     <style>
         :root {
-            --primary: #2c3e50;
+            --primary: #1a252f;
             --secondary: #27ae60;
-            --accent: #e67e22;
-            --bg: #f4f7f6;
+            --accent: #f39c12;
+            --bg: #ebedef;
             --white: #ffffff;
+            --text: #34495e;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             margin: 0;
             padding: 20px;
-            color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
             background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         header {
             text-align: center;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: 3px solid var(--secondary);
             margin-bottom: 30px;
-            padding-bottom: 10px;
+            padding-bottom: 20px;
         }
+
+        h1 { color: var(--primary); margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Sección README / Documentación */
+        .readme-section {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .readme-section h2 { color: var(--secondary); margin-top: 0; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .card {
             background: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            transition: transform 0.2s;
+            border: 1px solid #dee2e6;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .card:hover {
-            border-color: var(--secondary);
-        }
+        h3 { color: var(--primary); border-left: 4px solid var(--accent); padding-left: 10px; margin-bottom: 20px; }
 
-        h3 {
-            color: var(--secondary);
-            margin-top: 0;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-
+        label { display: block; margin: 12px 0 5px; font-weight: 600; color: #555; }
+        
         input {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 10px;
+            border: 1px solid #ccd1d1;
+            border-radius: 6px;
             box-sizing: border-box;
+            transition: border 0.3s;
         }
+
+        input:focus { border-color: var(--secondary); outline: none; box-shadow: 0 0 5px rgba(39,174,96,0.2); }
 
         button {
             width: 100%;
             background: var(--secondary);
             color: white;
             border: none;
-            padding: 15px;
-            font-size: 1.1em;
-            border-radius: 5px;
+            padding: 18px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 25px;
-        }
-
-        button:hover {
-            background: #219150;
-        }
-
-        #results {
             margin-top: 30px;
-            display: none;
+            transition: background 0.3s;
         }
 
+        button:hover { background: #219150; }
+
+        /* Resultados */
+        #results { margin-top: 40px; display: none; }
+        .result-group { margin-bottom: 25px; }
+        
         .result-item {
-            background: #f9f9f9;
-            padding: 15px;
+            background: #fff;
+            padding: 20px;
             margin-bottom: 15px;
-            border-left: 5px solid var(--secondary);
-            border-radius: 4px;
+            border-left: 6px solid var(--secondary);
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-        .suggestion {
-            font-style: italic;
-            color: #555;
-            margin-top: 5px;
-            font-size: 0.95em;
-        }
+        .res-val { font-size: 1.3em; color: var(--secondary); font-weight: bold; }
+        .formula-tag { font-family: monospace; background: #eee; padding: 2px 5px; border-radius: 3px; font-size: 0.85em; }
+        .suggestion { color: #d35400; font-weight: 500; margin-top: 10px; border-top: 1px dashed #ddd; padding-top: 8px; }
 
         footer {
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            color: white;
-            margin-left: 10px;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
         }
     </style>
 </head>
@@ -134,136 +128,150 @@
 
 <div class="container">
     <header>
-        <h1>Calculadora de Tesorería Corporativa</h1>
-        <p>Análisis de Liquidez, Eficiencia y Flujo de Caja</p>
+        <h1>Consola de Gestión de Tesorería</h1>
+        <p>Corporación: <strong>Análisis Financiero Avanzado</strong></p>
     </header>
+
+    <div class="readme-section">
+        <h2>📖 Guía de Origen y Aplicación de Datos</h2>
+        <p>Esta aplicación procesa datos contables para convertirlos en <strong>indicadores de decisión</strong>. A continuación, la explicación de la procedencia de la información:</p>
+        <ul>
+            <li><strong>Balances (Saldos):</strong> Se extraen del <em>Estado de Situación Financiera</em> al corte del mes. Representan lo que la empresa tiene y debe en un momento exacto.</li>
+            <li><strong>Datos Operativos:</strong> Se obtienen del <em>Estado de Resultados (P&G)</em>. Representan el movimiento acumulado (ventas y costos) durante el año o periodo analizado.</li>
+            <li><strong>Flujo de Caja:</strong> Proviene del <em>Estado de Flujos de Efectivo</em>, diferenciando lo que genera la operación de lo que se gasta en inversiones (CapEx).</li>
+        </ul>
+        <p><strong>Resultados:</strong> El sistema evalúa los ratios comparándolos con estándares corporativos (ej. Ratio Circulante > 1.0). Si el indicador es bajo, la app genera una sugerencia de mitigación de riesgo inmediata.</p>
+    </div>
 
     <div class="grid">
         <div class="card">
-            <h3>Datos de Balance (Saldos)</h3>
-            <label>Efectivo y Equivalentes ($)</label>
-            <input type="number" id="cash" placeholder="Ej: 50000">
+            <h3>1. Activos Líquidos (Balance)</h3>
+            <label>Efectivo en Caja/Bancos ($)</label>
+            <input type="number" id="cash" placeholder="Dinero disponible hoy">
             
             <label>Cuentas por Cobrar ($)</label>
-            <input type="number" id="cxc" placeholder="Ej: 120000">
+            <input type="number" id="cxc" placeholder="Total facturas pendientes de cobro">
             
             <label>Inventarios ($)</label>
-            <input type="number" id="inventory" placeholder="Ej: 80000">
-            
-            <label>Pasivo Circulante (Deudas < 1 año)</label>
-            <input type="number" id="current_liabilities" placeholder="Ej: 150000">
+            <input type="number" id="inventory" placeholder="Valor de mercancía en stock">
         </div>
 
         <div class="card">
-            <h3>Datos Operativos (Anual)</h3>
-            <label>Ventas a Crédito ($)</label>
-            <input type="number" id="sales" placeholder="Ej: 1000000">
+            <h3>2. Pasivos y Operación</h3>
+            <label>Pasivo Circulante ($)</label>
+            <input type="number" id="current_liabilities" placeholder="Deudas a pagar en < 1 año">
             
-            <label>Compras a Crédito ($)</label>
-            <input type="number" id="purchases" placeholder="Ej: 600000">
+            <label>Ventas Netas a Crédito ($)</label>
+            <input type="number" id="sales" placeholder="Ventas que no fueron de contado">
             
             <label>Costo de Ventas ($)</label>
-            <input type="number" id="cogs" placeholder="Ej: 700000">
-            
-            <label>Días del Periodo (normalmente 365)</label>
-            <input type="number" id="days" value="365">
+            <input type="number" id="cogs" placeholder="Costo de la mercancía vendida">
         </div>
 
         <div class="card">
-            <h3>Flujo de Caja y Capital</h3>
-            <label>Flujo de Caja Operativo ($)</label>
-            <input type="number" id="ope_cash" placeholder="Ej: 200000">
+            <h3>3. Inversión y Compras</h3>
+            <label>Compras a Crédito ($)</label>
+            <input type="number" id="purchases" placeholder="Total compras a proveedores">
             
-            <label>Gastos de Capital (CapEx) ($)</label>
-            <input type="number" id="capex" placeholder="Ej: 50000">
+            <label>Flujo Operativo ($)</label>
+            <input type="number" id="ope_cash" placeholder="Efectivo generado por la actividad">
+            
+            <label>Inversión (CapEx) ($)</label>
+            <input type="number" id="capex" placeholder="Gasto en activos fijos/maquinaria">
         </div>
     </div>
 
-    <button onclick="calculateFinance()">Calcular Indicadores de Tesorería</button>
+    <button onclick="runTreasuryAnalysis()">EJECUTAR ANÁLISIS FINANCIERO</button>
 
     <div id="results">
-        <h2>Resultados e Interpretación</h2>
+        <h2><center>📊 Diagnóstico de Tesorería</center></h2>
         <div id="displayResults"></div>
     </div>
 
     <footer>
         <p><strong>App desarrollada por VIBRAS POSITIVAS HM</strong></p>
-        <p>Derechos de Autor © 2026 | Contacto: 3117700431</p>
+        <p>Derechos de Autor © 2026 | Soporte Técnico: 3117700431</p>
     </footer>
 </div>
 
 <script>
-function calculateFinance() {
-    // Inputs
-    const cash = parseFloat(document.getElementById('cash').value) || 0;
-    const cxc = parseFloat(document.getElementById('cxc').value) || 0;
-    const inv = parseFloat(document.getElementById('inventory').value) || 0;
-    const pasivo = parseFloat(document.getElementById('current_liabilities').value) || 0;
-    const ventas = parseFloat(document.getElementById('sales').value) || 0;
-    const compras = parseFloat(document.getElementById('purchases').value) || 0;
-    const costo = parseFloat(document.getElementById('cogs').value) || 1;
-    const dias = parseFloat(document.getElementById('days').value) || 365;
-    const fco = parseFloat(document.getElementById('ope_cash').value) || 0;
-    const capex = parseFloat(document.getElementById('capex').value) || 0;
-
-    const activo_circ = cash + cxc + inv;
-
-    // Fórmulas
-    const razon_circ = activo_circ / pasivo;
-    const prueba_acida = (activo_circ - inv) / pasivo;
-    const ratio_tesoreria = cash / pasivo;
-    const cap_trabajo = activo_circ - pasivo;
-    
-    // Ratios de Actividad
-    const dias_cobro = (cxc / ventas) * dias;
-    const dias_inv = (inv / costo) * dias;
-    const dias_pago = (pasivo / compras) * dias; // Simplificado con pasivo actual
-    const cce = dias_inv + dias_cobro - dias_pago;
-    
-    // Flujo
-    const fcf = fco - capex;
-
-    // Mostrar Resultados
-    document.getElementById('results').style.display = 'block';
-    const display = document.getElementById('displayResults');
-    display.innerHTML = '';
-
-    const addResult = (title, value, unit, formula, explanation, suggestion) => {
-        display.innerHTML += `
-            <div class="result-item">
-                <strong>${title}: ${value.toLocaleString(undefined, {maximumFractionDigits: 2})} ${unit}</strong>
-                <div style="font-size: 0.85em; color: #666;">Fórmula: ${formula}</div>
-                <p>${explanation}</p>
-                <div class="suggestion">💡 <strong>Sugerencia:</strong> ${suggestion}</div>
-            </div>
-        `;
+function runTreasuryAnalysis() {
+    // Captura de datos
+    const d = {
+        cash: parseFloat(document.getElementById('cash').value) || 0,
+        cxc: parseFloat(document.getElementById('cxc').value) || 0,
+        inv: parseFloat(document.getElementById('inventory').value) || 0,
+        pasivo: parseFloat(document.getElementById('current_liabilities').value) || 1,
+        ventas: parseFloat(document.getElementById('sales').value) || 1,
+        compras: parseFloat(document.getElementById('purchases').value) || 1,
+        costo: parseFloat(document.getElementById('cogs').value) || 1,
+        fco: parseFloat(document.getElementById('ope_cash').value) || 0,
+        capex: parseFloat(document.getElementById('capex').value) || 0,
+        dias: 365
     };
 
-    addResult("Razón Circulante", razon_circ, "veces", "Activo Circ. / Pasivo Circ.", 
-        "Indica la capacidad de cubrir deudas de corto plazo.", 
-        razon_circ < 1 ? "Alerta: Riesgo de liquidez. Busque financiamiento o acelere cobros." : "Saludable: Tiene respaldo suficiente.");
+    const activo_circ = d.cash + d.cxc + d.inv;
 
-    addResult("Prueba Ácida", prueba_acida, "veces", "(Activo Circ. - Inv) / Pasivo Circ.", 
-        "Capacidad de pago sin depender de la venta de inventarios.", 
-        prueba_acida < 1 ? "Su liquidez inmediata depende mucho del stock. Cuidado con inventarios lentos." : "Excelente capacidad de reacción inmediata.");
+    // Cálculo de Fórmulas
+    const metrics = [
+        {
+            name: "Razón Circulante",
+            val: activo_circ / d.pasivo,
+            unit: "veces",
+            formula: "Activo Circulante / Pasivo Circulante",
+            desc: "Capacidad general para pagar deudas a corto plazo.",
+            sug: (activo_circ / d.pasivo) < 1.2 ? "Nivel de liquidez ajustado. Evite adquirir más deuda de corto plazo." : "Posición sólida. Capacidad de pago garantizada."
+        },
+        {
+            name: "Prueba Ácida",
+            val: (activo_circ - d.inv) / d.pasivo,
+            unit: "veces",
+            formula: "(Activo - Inventario) / Pasivo",
+            desc: "Liquidez inmediata sin depender de vender el inventario.",
+            sug: ((activo_circ - d.inv) / d.pasivo) < 1 ? "Depende mucho de sus ventas para pagar deudas. Mejore su flujo de caja." : "Excelente autonomía financiera frente a deudas inmediatas."
+        },
+        {
+            name: "Ratio de Tesorería (Cash Ratio)",
+            val: d.cash / d.pasivo,
+            unit: "veces",
+            formula: "Efectivo / Pasivo Circulante",
+            desc: "Capacidad de pago instantáneo con dinero en bancos.",
+            sug: (d.cash / d.pasivo) < 0.2 ? "Caja mínima. Riesgo de incumplimiento si hay retrasos en cobros." : "Caja saludable para cubrir vencimientos urgentes."
+        },
+        {
+            name: "Ciclo de Conversión de Efectivo",
+            val: ((d.inv/d.costo)*d.dias) + ((d.cxc/d.ventas)*d.dias) - ((d.pasivo/d.compras)*d.dias),
+            unit: "días",
+            formula: "Días Inv + Días CxC - Días CxP",
+            desc: "Días que transcurren desde que se paga la materia prima hasta que se cobra la venta.",
+            sug: "Si el número es alto, está financiando a sus clientes con su propio capital. Intente reducir los días de cobro."
+        },
+        {
+            name: "Flujo de Caja Libre (FCF)",
+            val: d.fco - d.capex,
+            unit: "$",
+            formula: "Flujo Operativo - CapEx",
+            desc: "Dinero sobrante para accionistas o pago de deuda tras mantener el negocio.",
+            sug: (d.fco - d.capex) < 0 ? "La inversión supera la generación de caja. Revise la rentabilidad de sus proyectos." : "Generación de valor positiva. Empresa con capacidad de reinversión."
+        }
+    ];
 
-    addResult("Ratio de Tesorería", ratio_tesoreria, "veces", "Efectivo / Pasivo Circ.", 
-        "Mide cuánto de la deuda se puede pagar 'ya mismo' con dinero en caja.", 
-        ratio_tesoreria < 0.3 ? "Efectivo bajo. Asegúrese de tener líneas de crédito disponibles." : "Nivel de caja óptimo para emergencias.");
+    // Renderizado de resultados
+    const container = document.getElementById('displayResults');
+    container.innerHTML = "";
+    document.getElementById('results').style.display = "block";
 
-    addResult("Capital de Trabajo Neto", cap_trabajo, "$", "Activo Circ. - Pasivo Circ.", 
-        "Recursos disponibles para operar el día a día.", 
-        cap_trabajo > 0 ? "Tiene fondo de maniobra para crecer." : "Peligro: Está operando con recursos de terceros o en déficit.");
+    metrics.forEach(m => {
+        container.innerHTML += `
+            <div class="result-item">
+                <span class="res-val">${m.name}: ${m.val.toLocaleString(undefined, {maximumFractionDigits: 2})} ${m.unit}</span><br>
+                <span class="formula-tag">Fórmula: ${m.formula}</span>
+                <p><em>${m.desc}</em></p>
+                <div class="suggestion">💡 <strong>Recomendación HM:</strong> ${m.sug}</div>
+            </div>
+        `;
+    });
 
-    addResult("Ciclo de Conversión de Efectivo (CCE)", cce, "días", "Días Inv. + Días CxC - Días CxP", 
-        "Tiempo total que el dinero está 'atrapado' en la operación.", 
-        cce > 90 ? "Ciclo muy largo. Intente cobrar más rápido o negociar más plazo con proveedores." : "Ciclo eficiente. El dinero retorna rápido a la caja.");
-
-    addResult("Flujo de Caja Libre (FCF)", fcf, "$", "Flujo Op. - CapEx", 
-        "Dinero disponible para pagar dividendos o reducir deuda.", 
-        fcf > 0 ? "Genera valor. Puede reinvertir o repartir utilidades." : "Cuidado: La operación no está cubriendo sus inversiones de capital.");
-    
-    // Desplazar a resultados
     window.scrollTo({ top: document.getElementById('results').offsetTop, behavior: 'smooth' });
 }
 </script>
